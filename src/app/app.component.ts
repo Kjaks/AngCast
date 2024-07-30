@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { GeolocationService } from './geolocation/geo.service';
 
 @Component({
   selector: 'app-root',
@@ -9,5 +10,25 @@ import { RouterOutlet } from '@angular/router';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'angular-17-app';
-}
+  title = 'Mi Aplicación Angular';
+  latitude: number | undefined;
+  longitude: number | undefined;
+  errorMessage: string | undefined;
+
+  constructor(private geolocationService: GeolocationService) { }
+
+  ngOnInit(): void {
+    this.getLocation();
+  }
+
+  getLocation(): void {
+    this.geolocationService.getCurrentPosition().subscribe(
+      (position) => {
+        this.latitude = position.coords.latitude;
+        this.longitude = position.coords.longitude;
+      },
+      (error) => {
+        this.errorMessage = error.message;
+      }
+    );
+  }}
