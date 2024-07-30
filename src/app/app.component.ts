@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { LocationComponent } from './actual-location/actual-location.component'
-
+import { LocationComponent } from './actual-location-component/actual-location.component'
 
 @Component({
   selector: 'app-root',

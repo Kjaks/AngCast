@@ -8,7 +8,7 @@ import { environment } from '../environments/environment';
   providedIn: 'root'
 })
 export class GeoService {
-  private apiUrl = 'http://api.openweathermap.org/geo/1.0/reverse?lat={lat}&lon={lon}&limit=1&appid={apiKey}';
+  private weatherApiUrl = 'http://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={apiKey}&units=metric';
   private apiKey = environment.API_KEY;
 
   constructor(private http: HttpClient) { }
@@ -27,8 +27,8 @@ export class GeoService {
     });
   }
 
-  getName(lat: number, lon: number): Observable<any> {
-    const url = this.apiUrl
+  getWeather(lat: number, lon: number): Observable<any> {
+    const url = this.weatherApiUrl
       .replace('{lat}', lat.toString())
       .replace('{lon}', lon.toString())
       .replace('{apiKey}', this.apiKey);
@@ -36,9 +36,14 @@ export class GeoService {
     return this.http.get(url);
   }
 
-  getCurrentLocationName(): Observable<any> {
+  getCurrentLocationWeather(): Observable<any> {
     return this.getCurrentPosition().pipe(
-      switchMap(position => this.getName(position.coords.latitude, position.coords.longitude))
+      switchMap(position => {
+        const lat = position.coords.latitude;
+        const lon = position.coords.longitude;
+        return this.getWeather(lat, lon);
+      })
     );
   }
 }
+

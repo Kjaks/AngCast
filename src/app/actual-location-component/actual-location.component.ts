@@ -11,30 +11,32 @@ export class LocationComponent implements OnInit {
   latitude: number = 0;
   longitude: number = 0;
   siteName: string = '';
+  weatherDescription: string = '';
+  temperature: string = '';
   errorMessage: string = '';
 
-  constructor(private geoCastService: GeoService) { }
+  constructor(private geoService: GeoService) { }
 
   ngOnInit(): void {
-    this.getLocationAndName();
-    console.log('HOLAAAA');
+    this.getLocationAndWeather();
   }
 
-  getLocationAndName(): void {
-    this.geoCastService.getCurrentLocationName().subscribe({
+  getLocationAndWeather(): void {
+    this.geoService.getCurrentLocationWeather().subscribe({
       next: (data) => {
-        if (data && data.length > 0) {
-          const locationData = data[0];
-          this.latitude = locationData.lat;
-          this.longitude = locationData.lon;
-          this.siteName = locationData.name || '';
+        if (data) {
+          this.latitude = data.coord.lat;
+          this.longitude = data.coord.lon;
+          this.siteName = data.name;
+          this.weatherDescription = data.weather[0]?.description || '';
+          this.temperature = data.main.temp;
         }
       },
       error: (error) => {
         this.errorMessage = error.message;
       },
       complete: () => {
-        console.log('Location and name retrieval complete');
+        console.log('Location and weather retrieval complete');
       }
     });
   }
