@@ -13,26 +13,33 @@ export class AppComponent implements OnInit {
   title = 'Mi Aplicación Angular';
   latitude: number = 0;
   longitude: number = 0;
+  siteName: string = '';
   errorMessage: string = '';
 
-  constructor(private geolocationService: GeoService) { }
+  constructor(private geoCastService: GeoService) { }
 
   ngOnInit(): void {
     this.getLocation();
   }
 
   getLocation(): void {
-    this.geolocationService.getCurrentPosition().subscribe({
-      next: (position) => {
-        this.latitude = position.coords.latitude;
-        this.longitude = position.coords.longitude;
+    this.geoCastService.getCurrentLocationName().subscribe({
+      next: (data) => {
+        if (data && data.length > 0) {
+          const locationData = data[0];
+          this.latitude = locationData.lat;
+          this.longitude = locationData.lon;
+          this.siteName = locationData.name || '';
+        }
       },
       error: (error) => {
         this.errorMessage = error.message;
       },
       complete: () => {
-        console.log('Geolocation complete');
+        console.log('Location and name retrieval complete');
       }
     });
   }
 }
+
+
