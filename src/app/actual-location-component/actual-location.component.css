@@ -1,0 +1,28 @@
+.weather-card {
+    background: linear-gradient(to bottom right, #4facfe, #00f2fe);
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    color: white;
+    font-family: 'Arial', sans-serif;
+    padding: 20px;
+    text-align: center;
+    width: 250px;
+    margin: 0 auto;
+  }
+  
+  .location {
+    font-size: 3em;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .time {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+  }
+  
+  .temperature {
+    font-size: 1em;
+    font-weight: bold;
+  }
+  

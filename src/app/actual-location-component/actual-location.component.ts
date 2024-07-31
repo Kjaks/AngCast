@@ -25,6 +25,7 @@ export class LocationComponent implements OnInit {
     this.geoService.getCurrentLocationWeather().subscribe({
       next: (data) => {
         if (data) {
+          console.log(data);
           this.latitude = data.coord.lat;
           this.longitude = data.coord.lon;
           this.siteName = data.name;
