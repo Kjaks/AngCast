@@ -1,0 +1,12 @@
+footer {
+    background-color: rgba(0, 0, 0, 0.1);
+    color: white;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+    grid-row: 3 / 4; /* Tercera fila del grid */
+    grid-column: 1 / -1; /* Ocupa toda la fila en términos de columnas */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

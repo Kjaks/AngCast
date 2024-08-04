@@ -1,23 +1,27 @@
-/* You can add global styles to this file, and also import other style files */
 :root {
     --primary-bg-color: linear-gradient(to top right, #4facfe, #00f2fe);
     --text-color: white;
+    --header-height: 60px; 
+    --footer-height: 60px;
+}
+
+html, body {
+    height: 100%; /* Asegura que html y body ocupen toda la altura del viewport */
+    margin: 0;
+    padding: 0;
 }
 
 body {
     background: var(--primary-bg-color);
     color: var(--text-color);
     font-family: 'Arial', sans-serif;
-    margin: 0;
-    padding: 0;
-    text-align: center;
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+    display: grid;
+    grid-template-rows: var(--header-height) 1fr var(--footer-height); /* Define alturas para header, contenido y footer */
+    grid-template-columns: 1fr; /* Una columna para todo el contenido */
+    height: 100%;
 }
 
 h1, p {
     margin: 10px 0;
+    text-align: center;
 }
